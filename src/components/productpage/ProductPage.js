@@ -31,9 +31,9 @@ class ProductPage extends Component {
                 <h5 className="card-title">
                   {this.props.product.name}
                   {this.props.product.inStock ? (
-                    <span> In Stock</span>
+                    <span className="text-success"> In Stock</span>
                   ) : (
-                    <span style={{ color: "red" }}> Sorry Out Of Stock</span>
+                    <span className="text-danger"> Sorry Out Of Stock</span>
                   )}
                 </h5>
                 <p className="card-text">{this.props.product.price} $</p>
