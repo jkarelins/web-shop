@@ -2,9 +2,12 @@ import React, { Component } from "react";
 import Header from "../header/Header";
 import { connect } from "react-redux";
 import getProduct from "../../store/productReducer/actions";
-import { Link } from "react-router-dom";
+import productAdded from "../../store/cartReducer/actions";
 
 class ProductPage extends Component {
+  addToCart(product) {
+    this.props.dispatch(productAdded(product));
+  }
   componentDidMount() {
     const {
       match: { params }
@@ -34,9 +37,12 @@ class ProductPage extends Component {
                   )}
                 </h5>
                 <p className="card-text">{this.props.product.price} $</p>
-                <Link to="/" className="btn btn-primary">
+                <button
+                  className="btn btn-primary"
+                  onClick={() => this.addToCart(this.props.product)}
+                >
                   Add To Cart
-                </Link>
+                </button>
               </div>
             </div>
           </div>
@@ -49,6 +55,8 @@ class ProductPage extends Component {
 }
 
 function mapStateToProps(reduxState) {
+  console.log(reduxState);
+
   return {
     product: reduxState.productReducer.productToShow
   };
