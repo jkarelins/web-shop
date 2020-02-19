@@ -1,12 +1,13 @@
 const initialState = {
-  selectedProducts: null
+  addedProducts: []
 };
 
 export default function cartReducer(state = initialState, action) {
   switch (action.type) {
-    case "product/SELECTED": {
+    case "product/ADDED": {
+      const product = action.payload;
       return {
-        selectedProducts: state
+        addedProducts: [...state.addedProducts, product]
       };
     }
     default: {
