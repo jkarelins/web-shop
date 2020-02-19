@@ -55,8 +55,6 @@ class ProductPage extends Component {
 }
 
 function mapStateToProps(reduxState) {
-  console.log(reduxState);
-
   return {
     product: reduxState.productReducer.productToShow
   };
