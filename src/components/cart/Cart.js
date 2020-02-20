@@ -88,7 +88,7 @@ class Cart extends Component {
               </Link>
 
               <button
-                className="btn btn-lg btn-alert ml-2"
+                className="btn btn-lg btn-warning ml-2"
                 onClick={this.clearCart}
               >
                 Clear Cart

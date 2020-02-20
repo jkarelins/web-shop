@@ -6,9 +6,9 @@ class Homepage extends Component {
   render() {
     return (
       <nav className="navbar navbar-expand-lg  justify-content-between">
-        <a className="navbar-brand" href="/">
+        <Link className="navbar-brand" to="/">
           Web Shop
-        </a>
+        </Link>
         <ul className="navbar-nav ">
           <li className="nav-item">
             <Link to="/" className="nav-link">
