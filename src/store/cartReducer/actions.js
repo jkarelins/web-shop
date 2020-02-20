@@ -18,4 +18,32 @@ function removeProduct(id) {
   };
 }
 
-module.exports = { productAdded, clearCart, removeProduct };
+function lessProducts(id) {
+  return {
+    type: "product/LESS",
+    payload: id
+  };
+}
+
+function moreProducts(id) {
+  return {
+    type: "product/MORE",
+    payload: id
+  };
+}
+
+function checkoutFinal(state) {
+  return {
+    type: "cart/CLOSE",
+    payload: state
+  };
+}
+
+module.exports = {
+  productAdded,
+  clearCart,
+  removeProduct,
+  lessProducts,
+  moreProducts,
+  checkoutFinal
+};

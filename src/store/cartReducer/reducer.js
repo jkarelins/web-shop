@@ -1,5 +1,6 @@
 const initialState = {
-  addedProducts: []
+  addedProducts: [],
+  completedOrders: []
   // should be {product}  && product.amount = 1
 };
 
@@ -19,7 +20,8 @@ export default function cartReducer(state = initialState, action) {
       if (state.addedProducts.length === 0) {
         product.amount = 1;
         return {
-          addedProducts: [...state.addedProducts, product]
+          addedProducts: [...state.addedProducts, product],
+          completedOrders: state.completedOrders
         };
       } else if (foundInArr) {
         const newArr = [...state.addedProducts].map(productFromArr => {
@@ -30,21 +32,26 @@ export default function cartReducer(state = initialState, action) {
           }
         });
         return {
-          addedProducts: newArr
+          addedProducts: newArr,
+          completedOrders: state.completedOrders
         };
       } else {
         product.amount = 1;
         return {
-          addedProducts: [...state.addedProducts, product]
+          addedProducts: [...state.addedProducts, product],
+          completedOrders: state.completedOrders
         };
       }
     }
     case "cart/CLEAR": {
+      // remove all products from cart
       return {
-        addedProducts: []
+        addedProducts: [],
+        completedOrders: state.completedOrders
       };
     }
     case "product/REMOVE": {
+      // Remove single product from cart
       let productId = action.payload;
       const customizedArr = [...state.addedProducts]
         .map(productObj => {
@@ -55,9 +62,54 @@ export default function cartReducer(state = initialState, action) {
           }
         })
         .filter(productObj => productObj != null);
+      return {
+        addedProducts: customizedArr,
+        completedOrders: state.completedOrders
+      };
+    }
+    case "product/LESS": {
+      // Make -1 of single product into cart
+      let productId = action.payload;
+      const customizedArr = [...state.addedProducts]
+        .map(productObj => {
+          if (productObj.id === productId) {
+            return { ...productObj, amount: productObj.amount - 1 };
+          } else {
+            return productObj;
+          }
+        })
+        .filter(productObj => productObj.amount >= 1);
+      return {
+        addedProducts: customizedArr,
+        completedOrders: state.completedOrders
+      };
+    }
+    case "product/MORE": {
+      // Make +1 of single product into cart
+      let productId = action.payload;
+      const customizedArr = [...state.addedProducts]
+        .map(productObj => {
+          if (productObj.id === productId) {
+            return { ...productObj, amount: productObj.amount + 1 };
+          } else {
+            return productObj;
+          }
+        })
+        .filter(productObj => productObj.amount >= 1);
+      return {
+        addedProducts: customizedArr,
+        completedOrders: state.completedOrders
+      };
+    }
+    case "cart/CLOSE": {
+      const user = action.payload;
+      const newOrder = { cart: state.addedProducts, user };
+      const customizedArr = [...state.completedOrders, newOrder];
+      console.log("user received: ", customizedArr);
 
       return {
-        addedProducts: customizedArr
+        addedProducts: [],
+        completedOrders: customizedArr
       };
     }
     default: {

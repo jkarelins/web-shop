@@ -39,6 +39,11 @@ class Homepage extends Component {
                 Checkout
               </Link>
             </li>
+            <li className="nav-item">
+              <Link to="/orders" className="nav-link">
+                Orders
+              </Link>
+            </li>
           </ul>
         </nav>
       </div>

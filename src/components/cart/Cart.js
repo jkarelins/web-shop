@@ -1,6 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { clearCart, removeProduct } from "../../store/cartReducer/actions";
+import {
+  clearCart,
+  removeProduct,
+  lessProducts,
+  moreProducts
+  // goToCheckout
+} from "../../store/cartReducer/actions";
+import { Link } from "react-router-dom";
 
 class Cart extends Component {
   componentDidMount() {}
@@ -12,6 +19,18 @@ class Cart extends Component {
   removeSingleProduct = id => {
     this.props.dispatch(removeProduct(id));
   };
+
+  productLess = id => {
+    this.props.dispatch(lessProducts(id));
+  };
+
+  productMore = id => {
+    this.props.dispatch(moreProducts(id));
+  };
+
+  // checkout = () => {
+  //   // this.props.dispatch(goToCheckout());
+  // };
 
   render() {
     if (this.props.cartInfo) {
@@ -31,8 +50,22 @@ class Cart extends Component {
             <ul>
               {this.props.cartInfo.map(product => {
                 return (
-                  <li key={product.id}>
-                    {product.name} / {product.amount} pc. /{product.price} ${" "}
+                  <li key={product.id} className="mb-2">
+                    {product.name} /{" "}
+                    <button
+                      className="btn btn-sm btn-warning mx-2"
+                      onClick={() => this.productLess(product.id)}
+                    >
+                      -
+                    </button>
+                    {product.amount}
+                    <button
+                      className="btn btn-sm btn-success mx-2"
+                      onClick={() => this.productMore(product.id)}
+                    >
+                      +
+                    </button>{" "}
+                    /{product.price} ${" "}
                     <button
                       className="btn btn-sm btn-danger ml-3"
                       onClick={() => this.removeSingleProduct(product.id)}
@@ -45,7 +78,15 @@ class Cart extends Component {
             </ul>
             Total to pay: {this.props.totalToPay} $
             <div className="mt-3">
-              <button className="btn btn-lg btn-success">Checkout & Buy</button>
+              <Link to="/checkout">
+                <button
+                  className="btn btn-lg btn-success"
+                  onClick={this.checkout}
+                >
+                  Checkout & Buy
+                </button>
+              </Link>
+
               <button
                 className="btn btn-lg btn-alert ml-2"
                 onClick={this.clearCart}
