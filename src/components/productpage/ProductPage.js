@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Header from "../header/Header";
 import { connect } from "react-redux";
 import getProduct from "../../store/productReducer/actions";
-import productAdded from "../../store/cartReducer/actions";
+import { productAdded } from "../../store/cartReducer/actions";
 
 class ProductPage extends Component {
   addToCart(product) {
@@ -36,13 +36,23 @@ class ProductPage extends Component {
                     <span className="text-danger"> Sorry Out Of Stock</span>
                   )}
                 </h5>
+                <p className="card-text">
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                </p>
                 <p className="card-text">{this.props.product.price} $</p>
-                <button
-                  className="btn btn-primary"
-                  onClick={() => this.addToCart(this.props.product)}
-                >
-                  Add To Cart
-                </button>
+                {this.props.product.inStock ? (
+                  <button
+                    className="btn btn-primary"
+                    onClick={() => this.addToCart(this.props.product)}
+                  >
+                    Add To Cart
+                  </button>
+                ) : (
+                  <button className="btn btn-primary" disabled>
+                    Sorry Not in Stock
+                  </button>
+                )}
               </div>
             </div>
           </div>

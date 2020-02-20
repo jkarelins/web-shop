@@ -20,7 +20,7 @@ class Homepage extends Component {
                   Cart {this.props.inCart}
                 </Link>
               ) : (
-                <button type="button" class="btn btn-primary">
+                <button type="button" className="btn btn-primary">
                   <Link
                     to="/cart"
                     className="text-light"
@@ -37,6 +37,11 @@ class Homepage extends Component {
             <li className="nav-item">
               <Link to="/checkout" className="nav-link">
                 Checkout
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/orders" className="nav-link">
+                Orders
               </Link>
             </li>
           </ul>
