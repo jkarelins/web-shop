@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 class Homepage extends Component {
   render() {
     return (
-      <div>
+      <div className="container">
         <h1>Header</h1>
         <nav className="navbar navbar-expand-lg">
           <ul className="navbar-nav">

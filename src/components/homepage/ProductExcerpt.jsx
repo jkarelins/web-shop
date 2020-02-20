@@ -9,10 +9,10 @@ export default class ProductExcerpt extends Component {
           <img className="card-img-top" src={this.props.imageUrl} alt="Card" />
           <div className="card-body">
             <h3 className="card-title">{this.props.name}</h3>
-            <p className="card-text">
+            {/* <p className="card-text">
               Some quick example text to build on the card title and make up the
               bulk of the card's content.
-            </p>
+            </p> */}
             {this.props.inStock ? (
               <p className="text-success font-weight-bold">instock!</p>
             ) : (
