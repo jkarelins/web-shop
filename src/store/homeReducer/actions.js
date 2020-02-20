@@ -14,6 +14,12 @@ export function productsFiltered(id) {
   };
 }
 
+export function showFetchedProducts() {
+  return {
+    type: "home/ALL_PRODUCTS"
+  };
+}
+
 export function fetchProducts(dispatch, getState) {
   fetch("http://localhost:4000/products")
     .then(response => response.json())

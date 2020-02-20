@@ -9,6 +9,10 @@ class Sidebar extends React.Component {
     this.props.dispatch(productsFiltered(id));
   };
 
+  showAllProducts = () => {
+    this.props.dispatch({ type: "home/ALL_PRODUCTS" });
+  };
+
   componentDidMount() {
     this.props.dispatch(fetchCategories);
   }
@@ -18,6 +22,13 @@ class Sidebar extends React.Component {
     } else {
       return (
         <div className="list-group">
+          <button
+            type="button"
+            className="list-group-item list-group-item-action"
+            onClick={this.showAllProducts}
+          >
+            All Products
+          </button>
           {this.props.categories.map(categorie => {
             return (
               // <li  className="list-group-item">

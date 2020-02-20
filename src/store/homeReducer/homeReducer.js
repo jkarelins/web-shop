@@ -18,6 +18,10 @@ export default function homeReducer(state = initialState, action) {
       });
       return { ...state, currentProducts: filteredProducts };
     }
+    case "home/ALL_PRODUCTS": {
+      const fetchedProducts = state.fetchedProducts;
+      return { ...state, currentProducts: fetchedProducts };
+    }
     default: {
       return state;
     }
