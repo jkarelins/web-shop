@@ -37,12 +37,18 @@ class ProductPage extends Component {
                   )}
                 </h5>
                 <p className="card-text">{this.props.product.price} $</p>
-                <button
-                  className="btn btn-primary"
-                  onClick={() => this.addToCart(this.props.product)}
-                >
-                  Add To Cart
-                </button>
+                {this.props.product.inStock ? (
+                  <button
+                    className="btn btn-primary"
+                    onClick={() => this.addToCart(this.props.product)}
+                  >
+                    Add To Cart
+                  </button>
+                ) : (
+                  <button className="btn btn-primary" disabled>
+                    Sorry Not in Stock
+                  </button>
+                )}
               </div>
             </div>
           </div>
