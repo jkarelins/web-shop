@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Header from "../header/Header";
 import { connect } from "react-redux";
 import getProduct from "../../store/productReducer/actions";
-import productAdded from "../../store/cartReducer/actions";
+import { productAdded } from "../../store/cartReducer/actions";
 
 class ProductPage extends Component {
   addToCart(product) {

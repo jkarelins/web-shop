@@ -39,6 +39,27 @@ export default function cartReducer(state = initialState, action) {
         };
       }
     }
+    case "cart/CLEAR": {
+      return {
+        addedProducts: []
+      };
+    }
+    case "product/REMOVE": {
+      let productId = action.payload;
+      const customizedArr = [...state.addedProducts]
+        .map(productObj => {
+          if (productObj.id === productId) {
+            return null;
+          } else {
+            return productObj;
+          }
+        })
+        .filter(productObj => productObj != null);
+
+      return {
+        addedProducts: customizedArr
+      };
+    }
     default: {
       return state;
     }

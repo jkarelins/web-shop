@@ -20,7 +20,7 @@ class Homepage extends Component {
                   Cart {this.props.inCart}
                 </Link>
               ) : (
-                <button type="button" class="btn btn-primary">
+                <button type="button" className="btn btn-primary">
                   <Link
                     to="/cart"
                     className="text-light"
