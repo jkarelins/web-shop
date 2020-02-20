@@ -42,7 +42,7 @@ class Homepage extends Component {
 
 function mapStateToProps(reduxState) {
   return {
-    products: reduxState.home
+    products: reduxState.home.currentProducts
   };
 }
 export default connect(mapStateToProps)(Homepage);

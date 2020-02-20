@@ -1,9 +1,14 @@
+// Sidebar.jsx
 import React from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import { fetchCategories } from "../store/categorieReducer/categorieActions";
+import { productsFiltered } from "../store/homeReducer/actions";
 
 class Sidebar extends React.Component {
+  filterProductsByCategorie = id => {
+    this.props.dispatch(productsFiltered(id));
+  };
+
   componentDidMount() {
     this.props.dispatch(fetchCategories);
   }
@@ -12,15 +17,22 @@ class Sidebar extends React.Component {
       return <div>Loading categories</div>;
     } else {
       return (
-        <ul className="list-group">
+        <div className="list-group">
           {this.props.categories.map(categorie => {
             return (
-              <li key={categorie.id} className="list-group-item">
-                <Link to={`/${categorie.id}`}>{categorie.name}</Link>
-              </li>
+              // <li  className="list-group-item">
+              <button
+                key={categorie.id}
+                type="button"
+                className="list-group-item list-group-item-action"
+                onClick={() => this.filterProductsByCategorie(categorie.id)}
+              >
+                {categorie.name}
+              </button>
+              // </li>
             );
           })}
-        </ul>
+        </div>
       );
     }
   }
