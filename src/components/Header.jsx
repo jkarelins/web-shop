@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
-export default class Homepage extends Component {
+class Homepage extends Component {
   render() {
     return (
       <div>
@@ -14,9 +15,24 @@ export default class Homepage extends Component {
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/cart" className="nav-link">
-                Cart
-              </Link>
+              {this.props.inCart === 0 ? (
+                <Link to="/cart" className="nav-link">
+                  Cart {this.props.inCart}
+                </Link>
+              ) : (
+                <button type="button" class="btn btn-primary">
+                  <Link
+                    to="/cart"
+                    className="text-light"
+                    style={{ textDecoration: "none" }}
+                  >
+                    Cart{" "}
+                    <span className="badge badge-light">
+                      {this.props.inCart}
+                    </span>
+                  </Link>
+                </button>
+              )}
             </li>
             <li className="nav-item">
               <Link to="/checkout" className="nav-link">
@@ -29,3 +45,11 @@ export default class Homepage extends Component {
     );
   }
 }
+
+function mapPropsToState({ cartReducer }) {
+  return {
+    inCart: cartReducer.addedProducts.reduce((acc, cur) => acc + cur.amount, 0)
+  };
+}
+
+export default connect(mapPropsToState)(Homepage);
