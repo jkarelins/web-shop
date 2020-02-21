@@ -105,8 +105,6 @@ export default function cartReducer(state = initialState, action) {
       const user = action.payload;
       const newOrder = { cart: state.addedProducts, user };
       const customizedArr = [...state.completedOrders, newOrder];
-      console.log("user received: ", customizedArr);
-
       return {
         addedProducts: [],
         completedOrders: customizedArr
@@ -117,5 +115,3 @@ export default function cartReducer(state = initialState, action) {
     }
   }
 }
-
-// addedProducts: [{ product: {}, amount: 0 }]

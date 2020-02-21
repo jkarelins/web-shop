@@ -7,12 +7,14 @@ import ProductPage from "./components/productpage/ProductPage";
 import Cart from "./components/cart/Cart";
 import Checkout from "./components/checkout/Checkout";
 import ClosedOrders from "./components/closeorders/ClosedOrders";
+import SearchPage from "./components/search/SearchPage";
 
 function App() {
   return (
     <div className="App">
       <Header />
       <Switch>
+        <Route path="/search" component={SearchPage} />
         <Route path="/orders" component={ClosedOrders} />
         <Route path="/checkout" component={Checkout} />
         <Route path="/cart" component={Cart} />
