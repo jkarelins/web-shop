@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import newSearchReq from "../store/searchReducer/actions";
 
@@ -21,6 +21,7 @@ class Header extends Component {
   };
 
   render() {
+    const { pathname } = this.props.location;
     return (
       <nav className="navbar navbar-expand-lg  justify-content-between">
         <Link className="navbar-brand" to="/">
@@ -60,22 +61,34 @@ class Header extends Component {
               Orders
             </Link>
           </li>
-          <form className="form-inline my-2 my-lg-0" onSubmit={this.newSearch}>
-            <input
-              name="search"
-              className="form-control mr-sm-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-              onChange={this.handleSearch}
-              value={this.state.search}
-            />
-            <input
-              type="submit"
-              className="btn btn-outline-success my-2 my-sm-0"
-              value="Search"
-            />
-          </form>
+          <li className="nav-item">
+            <Link to="/search" className="nav-link">
+              Search
+            </Link>
+          </li>
+          {pathname === "/search" ? (
+            <form
+              className="form-inline my-2 my-lg-0"
+              onSubmit={this.newSearch}
+            >
+              <input
+                name="search"
+                className="form-control mr-sm-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+                onChange={this.handleSearch}
+                value={this.state.search}
+              />
+              <input
+                type="submit"
+                className="btn btn-outline-success my-2 my-sm-0"
+                value="Search"
+              />
+            </form>
+          ) : (
+            ""
+          )}
         </ul>
       </nav>
     );
@@ -88,4 +101,4 @@ function mapPropsToState({ cartReducer }) {
   };
 }
 
-export default connect(mapPropsToState)(Header);
+export default connect(mapPropsToState)(withRouter(Header));
